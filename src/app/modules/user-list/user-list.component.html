@@ -1,8 +1,31 @@
-<h2>Users</h2>
-<ul class="heroes">
-  <li *ngFor="let user of userData">
-    <!-- [class.selected]="hero === selectedHero"
-    (click)="onSelect(hero)" -->
-     {{user?.user?.name?.title}} {{user?.user?.name?.first}} {{user?.user?.name?.last}}
-  </li>
-</ul>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark header">
+  <a class="navbar-brand" routerLink="">
+    <h1>Users</h1>
+  </a>
+  <div class='search-hero'>
+    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+      placeholder="&#61442;  Start searching users ">
+  </div>
+  <button class="btn btn-success" type="button" (click)="open()">Add User</button>
+  <button type="button" class="btn btn-info" (click)='logout()'>
+    <span class="glyphicon glyphicon-log-out"></span> Log out
+  </button>
+</nav>
+
+<div class="row enclose" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="200"
+  (scrolled)="getUserList()">
+  <div class="card" *ngFor="let user of userData | filter:searchText">
+    <img class="card-img-top rounded" [src]="user?.user?.picture?.large">
+    <div class="card-body">
+      <h5 class="card-title"> {{user?.user?.name?.title}} {{user?.user?.name?.first}} {{user?.user?.name?.last}}</h5>
+      <p class="card-text">{{user?.user?.email}}, {{user?.user?.username}} </p>
+      <p class="card-text">{{user?.user?.dob | date}}, {{user?.user?.gender}}</p>
+      <p class="card-text">{{user?.user?.phone}}, {{user?.user?.cell}}</p>
+      <p class="card-text">{{user?.user?.location?.street}}, {{user?.user?.location?.city}}</p>
+      <p class="card-text">{{user?.user?.location?.state}}, {{user?.user?.location?.zip}}</p>
+      <!-- <a (click)="goToDetails(product.id)" [popover]="product.title" triggers="mouseenter:mouseleave" class="btn btn-success ml-1">Product Details</a> -->
+    </div>
+  </div>
+</div>
+
+<app-add-user [isModalShown]="isAddModalShown"  (onCloseModal)="onCloseAddModal()"></app-add-user>

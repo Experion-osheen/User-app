@@ -1,1 +1,86 @@
-<p>add-user works!</p>
+<!-- Add User Popup -->
+<div  id="adduser" tabindex="-1" role="dialog" aria-labelledby="modal-label" 
+
+   data-backdrop="static">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title" id="modal-label">Add User</h4>
+            <!-- <button  type="button" class="close" (click)='hideModal();'>
+               <span aria-hidden="true">×</span>
+               </button> -->
+            <button #closeModalButton type="button" class="close" data-dismiss="modal" aria-label="Close" (click)='hideModal()'>
+            <span aria-hidden="true">×</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form [formGroup]='addForm'>
+               <div class="row">
+                  <div class="col-lg-6 col-xs-12">
+                     <div class="form-group">
+                        <label>First Name <span class="mandatary">*</span> </label>
+                        <input class="form-control" placeholder="First Name" type="text" (keydown)="onKey($event)"  myFocus="true" formControlName="firstName" maxlength="40">
+                        <span *ngIf="isSubmitted && addForm.controls.firstName.invalid" class="text-danger">
+                        {{errorMessage.commonErrorMessage}}
+                        </span>
+                     </div>
+                  </div>
+                  <div class="col-lg-6 col-xs-12">
+                     <div class="form-group">
+                        <label>Last Name <span class="mandatary">*</span></label>
+                        <input class="form-control" placeholder="Last Name" type="text" (keydown)="onKey($event)" formControlName="lastName" maxlength="40">
+                        <span *ngIf="isSubmitted && addForm.controls.lastName.invalid" class="text-danger">
+                        {{errorMessage.commonErrorMessage}}
+                        </span>
+                     </div>
+                  </div>
+                  <div class="col-lg-6 col-xs-12">
+                        <div class="form-group">
+                           <label>User name <span class="mandatary">*</span> </label>
+                           <input class="form-control" placeholder="User Name" type="text" myFocus="true" formControlName="username" maxlength="40">
+                           <span *ngIf="isSubmitted && addForm.controls.username.invalid" class="text-danger">
+                           {{errorMessage.commonErrorMessage}}
+                           </span>
+                        </div>
+                     </div>
+                     <div class="col-lg-6 col-xs-12">
+                        <div class="form-group">
+                           <label>Password <span class="mandatary">*</span></label>
+                           <input class="form-control" placeholder="Password" type="text" formControlName="password" maxlength="40">
+                           <span *ngIf="isSubmitted && addForm.controls.password.invalid" class="text-danger">
+                           {{errorMessage.commonErrorMessage}}
+                           </span>
+                        </div>
+                     </div>
+                  <div class="col-lg-6 col-xs-12">
+                     <div class="form-group">
+                        <label>DOB<span class="mandatary">*</span></label>
+                        <input readonly style="background-color: white" class="form-control" [maxDate]="toDate" #dpYMD="bsDatepicker"
+                        bsDatepicker formControlName="dob" [bsConfig]="{ dateInputFormat: 'MMM DD YYYY', showWeekNumbers:false }">
+                        <span *ngIf="isSubmitted && addForm.controls.dob.invalid" class="text-danger">
+                        {{errorMessage.commonErrorMessage}}
+                        </span>
+                     </div>
+                  </div>
+                  <div class="col-lg-6 col-xs-12">
+                     <div class="form-group mb-0">
+                        <label>Phone Number</label>
+                        <input class="form-control" placeholder="Phone Number"  [textMask]="{mask: phoneMask}" type="text"
+                        formControlName="phone" maxlength="40">
+                        <span *ngIf="isSubmitted && addForm.controls.phone.invalid" class="text-danger">
+                        {{errorMessage.commonErrorMessage}}
+                        </span>
+                     </div>
+                  </div>
+               </div>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)='hideModal()'>CANCEL</button>
+            <button type="button" class="btn btn-primary"  (click)='addUser();'>Submit</button>
+         </div>
+      </div>
+   </div>
+</div>
+<button #addModalButton type="button" class="btn btn-primary shcs-add-user-btn" data-toggle="modal" data-target="#adduser"
+[hidden]='true'>Add user</button>
