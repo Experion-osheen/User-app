@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [AuthService]
+  providers: []
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;

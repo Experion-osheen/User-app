@@ -1,1 +1,8 @@
-<p>user-list works!</p>
+<h2>Users</h2>
+<ul class="heroes">
+  <li *ngFor="let user of userData">
+    <!-- [class.selected]="hero === selectedHero"
+    (click)="onSelect(hero)" -->
+     {{user?.user?.name?.title}} {{user?.user?.name?.first}} {{user?.user?.name?.last}}
+  </li>
+</ul>

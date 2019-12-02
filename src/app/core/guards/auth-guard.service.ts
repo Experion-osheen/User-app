@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../services';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class UserLoadPermission implements CanActivate {
   constructor(private router: Router, private authService: AuthService) { }
 
   canActivate(
@@ -18,7 +18,24 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | boolean {
     if (!this.authService.isAuthenticated()) {
-      this.router.navigate(['auth/login']);
+      this.router.navigate(['login']);
+      return false;
+    }
+
+    return true;
+  }
+}
+
+@Injectable()
+export class NoUserLoadPermission implements CanActivate {
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+  ) {
+  }
+  canActivate(): boolean {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['list']);
       return false;
     }
 

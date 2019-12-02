@@ -5,7 +5,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpHeaderInterceptor } from './interceptors/http.header.interceptor';
 import { HttpErrorInterceptor } from './interceptors/http.error.interceptor';
 import { ApiService,  ErrorsHandler, WebStorageService, AppConfigurationService } from './services';
-import { AuthGuard } from './guards';
 
 import { NotFoundModule, NetworkDetectionModule } from './components';
 
@@ -28,7 +27,6 @@ import { NotFoundModule, NetworkDetectionModule } from './components';
       useClass: ErrorsHandler
     },
     ApiService,
-    AuthGuard,
     AppConfigurationService,
     WebStorageService
   ],

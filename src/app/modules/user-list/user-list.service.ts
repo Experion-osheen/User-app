@@ -4,11 +4,11 @@ import { ApiService } from '@service';
 @Injectable({
   providedIn: 'root'
 })
-export class USerListService {
+export class UserListService {
   public status: any;
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) { }
 
-  public changeStatus = dataToSend => {
-    return this.apiService.post('bidding/changestatus', dataToSend);
+  public getUser = (reqN) => {
+    return this.apiService.get('?results=' + reqN);
   }
 }

@@ -20,7 +20,8 @@ export class AppConfigurationService {
 
   public messages = {
     loginSuccess : 'Succesfully logged in',
-    loginError : 'Please provide valid credentials'
+    loginError : 'Please provide valid credentials',
+    error : 'Something went wrong! Please try again later'
   };
 
 }

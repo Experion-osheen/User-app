@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://randomuser.me/api/',
+  apiUrl: 'https://randomuser.me/api/0.8',
 };
 
 /*

@@ -4,9 +4,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotFoundModule } from './core/components/not-found/not-found.module';
 import { NotificationModule } from './core/components/notification/notification.module';
-import { BroadcastService } from '@service';
+import { BroadcastService, AuthService } from '@service';
 import { HttpClientModule } from '@angular/common/http';
-
+import {
+  NoUserLoadPermission,
+  UserLoadPermission
+} from './core/guards/auth-guard.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +22,10 @@ import { HttpClientModule } from '@angular/common/http';
     NotificationModule
   ],
   providers: [
-    BroadcastService
+    BroadcastService,
+    NoUserLoadPermission,
+    UserLoadPermission,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

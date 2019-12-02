@@ -10,7 +10,7 @@ export class AuthService {
   public isAuthenticated() {
     let IsLoggedIn: any;
     IsLoggedIn = this.webStorageService.getData('IsLoggedIn');
-    const response = IsLoggedIn ? IsLoggedIn.IsLoggedIn : false;
+    const response = IsLoggedIn ? IsLoggedIn.isLoggedIn : false;
     return response;
   }
 
