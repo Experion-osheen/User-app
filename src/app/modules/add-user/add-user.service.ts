@@ -9,7 +9,4 @@ export class AddUSerService {
   public status: any;
   constructor(private apiService: ApiService) { }
 
-  public changeStatus = dataToSend => {
-    return this.apiService.post('bidding/changestatus', dataToSend);
-  }
 }

@@ -1,8 +1,6 @@
-import { DATE } from 'ngx-bootstrap/chronos/units/constants';
 import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { BroadcastService, AppConfigurationService, WebStorageService } from '@service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-add-user',
@@ -89,6 +87,9 @@ export class AddUserComponent implements OnInit, OnChanges {
 
   hideModal() {
     this.addForm.reset();
+    this.addForm.patchValue({
+      title: 'Mr.'
+    });
     this.isModalShown = false;
     this.onCloseModal.next('');
   }

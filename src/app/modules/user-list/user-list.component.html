@@ -6,7 +6,7 @@
     <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
       placeholder="&#61442;  Start searching users ">
   </div>
-  <button class="btn btn-success" type="button" (click)="open()">Add User</button>
+  <button class="btn btn-success" type="button" (click)="addUser()">Add User</button>
   <button type="button" class="btn btn-info" (click)='logout()'>
     <span class="glyphicon glyphicon-log-out"></span> Log out
   </button>
@@ -28,4 +28,4 @@
   </div>
 </div>
 
-<app-add-user [isModalShown]="isAddModalShown"  (onCloseModal)="onCloseAddModal()"></app-add-user>
+<!-- <app-add-user [isModalShown]="isAddModalShown"  (onCloseModal)="onCloseAddModal()"></app-add-user> -->
