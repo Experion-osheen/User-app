@@ -5,19 +5,14 @@ import { Injectable } from '@angular/core';
 })
 export class AppConfigurationService {
   constructor() { }
-
   static regExp = {
     // tslint:disable-next-line:max-line-length
     email: /(?:[a-z0-9!#$%&\'*+/=?^_`{|}~-])+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
     password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/
   };
-
-
-  /** Webstorage service */
-  public storageKeyPrefix = 'PPSREVAMP_';
-
+  public storageKeyPrefix = 'USERAPP_';
   public localStorage = true;
-
+  public phoneMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   public messages = {
     loginSuccess : 'Succesfully logged in',
     loginError : 'Please provide valid credentials',
