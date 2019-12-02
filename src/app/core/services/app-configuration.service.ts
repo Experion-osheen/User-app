@@ -18,4 +18,9 @@ export class AppConfigurationService {
 
   public localStorage = true;
 
+  public messages = {
+    loginSuccess : 'Succesfully logged in',
+    loginError : 'Please provide valid credentials'
+  };
+
 }

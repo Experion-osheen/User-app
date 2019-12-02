@@ -14,6 +14,11 @@ const routes: Routes = [
       './modules/user-list/user-list.module#UserListModule'
   },
   {
+    path: '',
+    loadChildren:
+      './modules/login/login.module#LoginModule'
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }

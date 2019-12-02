@@ -8,10 +8,12 @@ import * as data from './data.json';
 export class LoginService {
   public status: any;
   constructor(private apiService: ApiService) {
-    console.log(data, 'Data');
   }
 
-  public changeStatus = dataToSend => {
-    return this.apiService.post('bidding/changestatus', dataToSend);
+  public login = (dataToSend) => {
+    if (dataToSend.username === data.username && dataToSend.password === data.password) {
+      return true;
+    }
+    return false;
   }
 }

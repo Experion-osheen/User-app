@@ -11,6 +11,8 @@ export const routes = [
   declarations: [LoginComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
   exports: [LoginComponent]
