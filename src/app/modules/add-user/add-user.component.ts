@@ -1,6 +1,7 @@
+import { DATE } from 'ngx-bootstrap/chronos/units/constants';
 import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { ValidationService, AppConfigurationService, WebStorageService } from '@service';
+import { BroadcastService, AppConfigurationService, WebStorageService } from '@service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
@@ -21,15 +22,21 @@ export class AddUserComponent implements OnInit, OnChanges {
   isSubmitted = false;
   public errorMessage: any;
   phoneMask: any;
+  titles: any;
+  toDate: any;
   constructor(
     private formBuilder: FormBuilder,
     private appConfigurationService: AppConfigurationService,
+    private broadcastService: BroadcastService,
     private webStorageService: WebStorageService) { }
 
   ngOnInit() {
     this.errorMessage = this.appConfigurationService.messages;
     this.phoneMask = this.appConfigurationService.phoneMask;
+    this.titles = this.appConfigurationService.titles;
+    this.toDate = new Date();
     this.addForm = this.formBuilder.group({
+      title: ['Mr.', [Validators.required]],
       gender: ['', [Validators.required]],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
@@ -51,21 +58,33 @@ export class AddUserComponent implements OnInit, OnChanges {
   }
 
   addUser() {
-    console.log('in add user');
     this.isSubmitted = true;
     if (this.addForm.invalid) {
       return;
     }
+    const response = this.addForm.value;
+    response.name = {
+      title: response.title,
+      first: response.firstName,
+      last: response.lastName,
+    };
     let userList: any;
     userList = this.webStorageService.getData('user-list');
-
-    console.log(this.addForm.value);
-
-    userList.push(this.addForm.value);
+    if (userList) {
+      if (userList.results) {
+        userList.results.push(response);
+      } else {
+        userList.results = [response];
+      }
+    } else {
+      userList = {
+        results: [response]
+      };
+    }
     this.webStorageService.saveData('user-list', userList);
-    console.log(this.addForm.value);
     this.isSubmitted = false;
     this.hideModal();
+    this.broadcastService.broadcastAlert('success', this.errorMessage.addSuccess);
   }
 
   hideModal() {

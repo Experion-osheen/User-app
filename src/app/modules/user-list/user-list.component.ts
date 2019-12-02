@@ -42,7 +42,7 @@ export class UserListComponent implements OnInit {
     this.userListService
       .getUser(this.reqN)
       .subscribe(
-        data => (this.userData = data.results),
+        data => (this.userData = data),
         err => {
           this.broadcastService.broadcastAlert('error', this.messages.error);
         },
