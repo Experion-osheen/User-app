@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges, Output, EventEmitter, TemplateRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { BroadcastService, AppConfigurationService, WebStorageService } from '@service';
+import { BroadcastService, AppConfigurationService, WebStorageService, ValidationService } from '@service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
@@ -10,6 +9,12 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class AddUserComponent implements OnInit, OnChanges {
   modalRef: BsModalRef;
+  config = {
+    animated: true,
+    keyboard: true,
+    backdrop: false,
+    ignoreBackdropClick: true
+  };
 
   @ViewChild('addModalButton', { static: false }) addModalButton: ElementRef;
   @ViewChild('closeModalButton', { static: false }) closeModalButton: ElementRef;
@@ -29,7 +34,8 @@ export class AddUserComponent implements OnInit, OnChanges {
     private appConfigurationService: AppConfigurationService,
     private broadcastService: BroadcastService,
     private modalService: BsModalService,
-    private webStorageService: WebStorageService) { }
+    private webStorageService: WebStorageService
+    ) { }
 
   ngOnInit() {
     this.errorMessage = this.appConfigurationService.messages;
@@ -43,6 +49,7 @@ export class AddUserComponent implements OnInit, OnChanges {
       lastName: ['', [Validators.required]],
       password: ['', [Validators.required]],
       username: ['', [Validators.required]],
+      email: ['', [Validators.required, ValidationService.emailValidator]],
       dob: ['', [Validators.required]],
       phone: ['', [Validators.required]],
     });
@@ -59,7 +66,7 @@ export class AddUserComponent implements OnInit, OnChanges {
   }
 
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+    this.modalRef = this.modalService.show(template, this.config);
   }
 
 
@@ -74,17 +81,37 @@ export class AddUserComponent implements OnInit, OnChanges {
       first: response.firstName,
       last: response.lastName,
     };
+
+    // Adding static images and location
+    response.picture = {
+      large: 'https://randomuser.me/api/portraits/men/90.jpg',
+      medium: 'https://randomuser.me/api/portraits/med/men/90.jpg',
+      thumbnail: 'https://randomuser.me/api/portraits/thumb/men/90.jpg'
+    };
+    response.location = {
+      street: '8387 mill lane',
+      city: 'st albans',
+      state: 'oxfordshire',
+      zip: 'L6I 1PQ'
+    };
+    response.cell = response.phone;
+    response.email = 'static@gmail.com';
+
+    const userObject = {
+      user: response
+    };
+
     let userList: any;
     userList = this.webStorageService.getData('user-list');
     if (userList) {
       if (userList.results) {
-        userList.results.push(response);
+        userList.results.push(userObject);
       } else {
-        userList.results = [response];
+        userList.results = [userObject];
       }
     } else {
       userList = {
-        results: [response]
+        results: [userObject]
       };
     }
     this.webStorageService.saveData('user-list', userList);

@@ -12,7 +12,7 @@ export class UserListComponent implements OnInit {
 
   reqN = 0;
   count = 1;
-  userData = [];
+  userData: any;
   messages: any;
   searchText = '';
   isAddModalShown = false;
@@ -59,6 +59,7 @@ export class UserListComponent implements OnInit {
 
   onCloseAddModal() {
     this.isAddModalShown = false;
+    this.userData = this.webStorageService.getData('user-list');
   }
 
   logout() {
