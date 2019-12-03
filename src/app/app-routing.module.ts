@@ -5,6 +5,7 @@ import {
   NoUserLoadPermission,
   UserLoadPermission
 } from './core/guards/auth-guard.service';
+
 const routes: Routes = [
   {
     path: 'login',

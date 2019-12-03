@@ -5,10 +5,7 @@ import { AddUserComponent } from './add-user.component';
 import { RouterModule } from '@angular/router';
 import { TextMaskModule } from 'angular2-text-mask';
 import { BsDatepickerModule } from 'ngx-bootstrap';
-
-export const routes = [
-  { path: '', component: AddUserComponent, pathMatch: 'full' }
-];
+import { ModalModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [AddUserComponent],
@@ -17,8 +14,8 @@ export const routes = [
     TextMaskModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes),
     BsDatepickerModule.forRoot(),
+    ModalModule.forRoot()
   ],
   exports: [AddUserComponent],
 })
