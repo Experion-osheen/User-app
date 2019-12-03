@@ -61,4 +61,18 @@ bs-datepicker-navigation-view .previous,.next {
   font-size: 14px;
 }
 
+.login-flex-container {
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-title {
+  text-align: center;
+    font-size: 32px;
+    margin-bottom: 24px;
+}
+
 
