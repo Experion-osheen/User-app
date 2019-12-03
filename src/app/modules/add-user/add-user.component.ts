@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges, Output, EventEmitter, TemplateRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { BroadcastService, AppConfigurationService, WebStorageService } from '@service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-add-user',
@@ -8,6 +9,7 @@ import { BroadcastService, AppConfigurationService, WebStorageService } from '@s
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit, OnChanges {
+  modalRef: BsModalRef;
 
   @ViewChild('addModalButton', { static: false }) addModalButton: ElementRef;
   @ViewChild('closeModalButton', { static: false }) closeModalButton: ElementRef;
@@ -26,6 +28,7 @@ export class AddUserComponent implements OnInit, OnChanges {
     private formBuilder: FormBuilder,
     private appConfigurationService: AppConfigurationService,
     private broadcastService: BroadcastService,
+    private modalService: BsModalService,
     private webStorageService: WebStorageService) { }
 
   ngOnInit() {
@@ -54,6 +57,11 @@ export class AddUserComponent implements OnInit, OnChanges {
       }
     }
   }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
 
   addUser() {
     this.isSubmitted = true;
@@ -86,6 +94,7 @@ export class AddUserComponent implements OnInit, OnChanges {
   }
 
   hideModal() {
+    this.modalRef.hide();
     this.addForm.reset();
     this.addForm.patchValue({
       title: 'Mr.'
