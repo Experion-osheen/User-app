@@ -35,7 +35,7 @@ export class AddUserComponent implements OnInit, OnChanges {
     private broadcastService: BroadcastService,
     private modalService: BsModalService,
     private webStorageService: WebStorageService
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.errorMessage = this.appConfigurationService.messages;
@@ -95,7 +95,6 @@ export class AddUserComponent implements OnInit, OnChanges {
       zip: 'L6I 1PQ'
     };
     response.cell = response.phone;
-    response.email = 'static@gmail.com';
 
     const userObject = {
       user: response
@@ -118,6 +117,9 @@ export class AddUserComponent implements OnInit, OnChanges {
     this.isSubmitted = false;
     this.hideModal();
     this.broadcastService.broadcastAlert('success', this.errorMessage.addSuccess);
+    // Search functionality can be used for added user.
+    // On scroll the localstorage is reloaded and added user may be gone.
+    // Search can be done with api, not done for now as api doc is not detailed.
   }
 
   hideModal() {
