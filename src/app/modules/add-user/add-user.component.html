@@ -67,8 +67,9 @@
                <div class="col-lg-6 col-xs-12">
                   <div class="form-group">
                      <label>Password <span class="mandatary">*</span></label>
-                     <input class="form-control" placeholder="Password" type="text" formControlName="password"
-                        maxlength="40">
+                     <input [type]="show ? 'text' : 'password'" class="form-control" placeholder="Password"
+                        formControlName="password" maxlength="40">
+                     <i class="fa fa-eye password-view " (click)='showHide()'></i>
                      <span *ngIf="isSubmitted && addForm.controls.password.invalid" class="text-danger">
                         {{errorMessage.commonErrorMessage}}
                      </span>

@@ -75,4 +75,14 @@ bs-datepicker-navigation-view .previous,.next {
     margin-bottom: 24px;
 }
 
+.form-group {
+  position: relative
+}
+.password-view{
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+
+
 

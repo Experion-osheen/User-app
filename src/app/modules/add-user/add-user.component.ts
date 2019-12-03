@@ -7,8 +7,10 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css']
 })
+
 export class AddUserComponent implements OnInit, OnChanges {
   modalRef: BsModalRef;
+  show = true;
   config = {
     animated: true,
     keyboard: true,
@@ -18,7 +20,6 @@ export class AddUserComponent implements OnInit, OnChanges {
 
   @ViewChild('addModalButton', { static: false }) addModalButton: ElementRef;
   @ViewChild('closeModalButton', { static: false }) closeModalButton: ElementRef;
-
   @Input() isModalShown: any;
   // tslint:disable-next-line: no-output-on-prefix
   @Output() onCloseModal = new EventEmitter();
@@ -69,6 +70,9 @@ export class AddUserComponent implements OnInit, OnChanges {
     this.modalRef = this.modalService.show(template, this.config);
   }
 
+  showHide() {
+    this.show = !this.show;
+  }
 
   addUser() {
     this.isSubmitted = true;
